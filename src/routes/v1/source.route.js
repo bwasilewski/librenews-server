@@ -4,14 +4,14 @@ const router = express.Router();
 
 router
 	.route('/fetch')
-	.get((req, res) => sourceController.getSources(req, res))
+	.get((req, res, next) => sourceController.getSources(req, res, next))
 
 router
 	.route('/refresh')
-	.get((req, res) => sourceController.refreshSources(req, res))
+	.get((req, res, next) => sourceController.refreshSources(req, res, next))
 
 router
 	.route('/clear')
-	.get((req, res) => sourceController.clearSources(req, res))
+	.get((req, res, next) => sourceController.clearSources(req, res, next))
 
 module.exports = router;
