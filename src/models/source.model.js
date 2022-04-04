@@ -3,16 +3,17 @@ const { toJSON } = require('./plugins');
 
 const sourceSchema = mongoose.Schema(
 	{
-		id: {
-			type: String,
-			unique: true,
-		},
+		id: String,
 		name: String,
 		url: String,
 		description: String,
 		category: [String],
 		language: [String],
 		country: [String],
+		click_count: {
+			type: 0,
+			default: 0
+		}
 	}, {
 		timestamps: true
 	}
