@@ -10,16 +10,19 @@ const headlineSchema = mongoose.Schema(
 		description: String,
 		image_url: String,
 		keywords: [String],
-		language: [String],
-		link: String,
-		pubDate: Date,
-		source_id: String,
-		id: {
+		language: String,
+		link: {
 			type: String,
 			unique: true
 		},
+		pubDate: Date,
+		source_id: String,
 		title: String,
 		video_url: String,
+		click_count: {
+			type: Number,
+			default: 0,
+		},
 	}, {
 		timestamps: true
 	}
@@ -33,4 +36,4 @@ headlineSchema.plugin(toJSON)
  */
 const Headline = mongoose.model('Headline', headlineSchema, 'headline');
 
-module.exports = Headline;
+module.exports = Headline
