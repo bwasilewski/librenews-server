@@ -13,7 +13,6 @@ const getSources =
 			const response = await Source.find({})
 			res.send(response)
 		} catch (err) {
-			console.log(err)
 			next(err)
 		}
 	})
@@ -23,9 +22,20 @@ const refreshSources =
 		try {
 			const response = await fetch(domain)
 			const data = await response.json()
-			res.send(data)
+
+			const promises = data.results.map(async result => {
+				return await Source.findOneAndUpdate(
+					{ api_id: result.id },
+					{...result, api_id: result.id},
+					{ new: true, upsert:true }
+				)
+			})
+
+			const docs = await Promise.all(promises)
+
+			res.send(docs)
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 			next(err)
 		}
 	})
@@ -36,7 +46,7 @@ const clearSources =
 			const response = await Source.deleteMany({})
 			res.send(response)
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 			next(err)
 		}
 	})

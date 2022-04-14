@@ -34,6 +34,6 @@ headlineSchema.plugin(toJSON)
 /**
  * @typedef Headline
  */
-const Headline = mongoose.model('Headline', headlineSchema, 'headline');
+const Headline = mongoose.model('Headline', headlineSchema, 'headlines');
 
 module.exports = Headline

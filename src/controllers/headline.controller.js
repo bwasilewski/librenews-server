@@ -9,7 +9,7 @@ const getHeadlines =
 		try {
 			const limit = req.query.size ? parseInt(req.query.size) : 20
 			const query = req.query.category ? { category: req.query.category } : {}
-			const response = await Headline.find(query).limit(limit)
+			const response = await Headline.find(query).limit(limit).sort([['pubDate', -1]])
 			res.send(response)
 		} catch (err) {
 			next(err)
@@ -25,20 +25,16 @@ const refreshHeadlines =
 			// TODO: only remove records that are older than 2(?) weeks
 			// const docs = await Headline.create(data.results)
 			const promises = data.results.map(async (result) => {
-				const doc = await Headline.findOneAndUpdate(
+				return await Headline.findOneAndUpdate(
 					{ link: result.link },
-					{ $set: result }, 
-					{ new: true, upsert: true, rawResult: true })
+					result, 
+					{ new: true, upsert: true }
+				)
 			})
-
 			const docs = await Promise.all(promises)
+			console.log('success: ', docs.length)
 
-			console.log(docs)
-
-			res.send({
-				status: 'success',
-				data: docs
-			})
+			res.send(docs)
 		} catch (err) {
 			console.error(err)
 			next(err)

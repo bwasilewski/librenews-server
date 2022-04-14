@@ -3,7 +3,10 @@ const { toJSON } = require('./plugins');
 
 const sourceSchema = mongoose.Schema(
 	{
-		id: String,
+		api_id: {
+			type: String,
+			unique: true,
+		},
 		name: String,
 		url: String,
 		description: String,
@@ -25,6 +28,6 @@ sourceSchema.plugin(toJSON)
 /**
  * @typedef Source
  */
-const Source = mongoose.model('Source', sourceSchema, 'source');
+const Source = mongoose.model('Source', sourceSchema, 'sources');
 
 module.exports = Source;
