@@ -3,7 +3,7 @@ const { toJSON } = require('./plugins');
 
 const sourceSchema = mongoose.Schema(
 	{
-		id: {
+		api_id: {
 			type: String,
 			unique: true,
 		},
@@ -13,6 +13,10 @@ const sourceSchema = mongoose.Schema(
 		category: [String],
 		language: [String],
 		country: [String],
+		click_count: {
+			type: 0,
+			default: 0
+		}
 	}, {
 		timestamps: true
 	}
@@ -24,6 +28,6 @@ sourceSchema.plugin(toJSON)
 /**
  * @typedef Source
  */
-const Source = mongoose.model('Source', sourceSchema, 'source');
+const Source = mongoose.model('Source', sourceSchema, 'sources');
 
 module.exports = Source;
