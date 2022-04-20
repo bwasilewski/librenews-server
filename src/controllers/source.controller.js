@@ -35,7 +35,6 @@ const refreshSources =
 
 			res.send(docs)
 		} catch (err) {
-			console.error(err)
 			next(err)
 		}
 	})
@@ -46,7 +45,6 @@ const clearSources =
 			const response = await Source.deleteMany({})
 			res.send(response)
 		} catch (err) {
-			console.error(err)
 			next(err)
 		}
 	})

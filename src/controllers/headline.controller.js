@@ -19,7 +19,6 @@ const getHeadlines =
 const refreshHeadlines = 
 	catchAsync(async (req, res, next) => {
 		try {
-			console.log('fetching headlines...')
 			const response = await fetch(domain)
 			const data = await response.json()
 			// TODO: only remove records that are older than 2(?) weeks
@@ -32,11 +31,9 @@ const refreshHeadlines =
 				)
 			})
 			const docs = await Promise.all(promises)
-			console.log('success: ', docs.length)
 
 			res.send(docs)
 		} catch (err) {
-			console.error(err)
 			next(err)
 		}
 	})
@@ -47,7 +44,6 @@ const clearHeadlines =
 			const response = await Headline.deleteMany({})
 			res.send(response)
 		} catch (err) {
-			console.error(err)
 			next(err)
 		}
 	})
