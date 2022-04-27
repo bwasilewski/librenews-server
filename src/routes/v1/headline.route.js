@@ -7,6 +7,10 @@ router
 	.get((req, res, next) => headlineController.getHeadlines(req, res, next))
 
 router
+	.route('/top')
+	.get((req, res, next) => headlineController.getTopStory(req, res, next))
+
+router
 	.route('/refresh')
 	.get((req, res, next) => headlineController.refreshHeadlines(req, res, next))
 
