@@ -8,7 +8,7 @@ router
 
 router
 	.route('/top')
-	.get((req, res, next) => headlineController.getTopStory(req, res, next))
+	.get((req, res, next) => headlineController.getTopStories(req, res, next))
 
 router
 	.route('/refresh')
