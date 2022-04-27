@@ -7,7 +7,7 @@ const domain = `https://newsdata.io/api/1/news?apikey=${process.env.NEWSDATA_KEY
 const getTopStories = 
 	catchAsync(async (req, res, next) => {
 		try {
-			const response = await Headline.find({category: 'top'}).limit(4)
+			const response = await Headline.find({category: 'top'}).limit(4).sort([['pubDate', -1]])
 			res.send(response)
 		} catch (err) {
 			next(err)
