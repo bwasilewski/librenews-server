@@ -4,6 +4,17 @@ const fetch = require('node-fetch')
 
 const domain = `https://newsdata.io/api/1/news?apikey=${process.env.NEWSDATA_KEY}&language=en&country=us`
 
+
+const getCategories = 
+	catchAsync(async (req, res, next) => {
+		try {
+			const response = await Headline.distinct('category')
+			res.send(response)	
+		} catch (err) {
+			next(err)
+		}
+	})
+
 const getTopStories = 
 	catchAsync(async (req, res, next) => {
 		try {
@@ -60,6 +71,7 @@ const clearHeadlines =
 	})
 
 module.exports = {
+	getCategories,
 	getHeadlines,
 	getTopStories,
 	clearHeadlines,
