@@ -10,8 +10,8 @@ By running a single command, you will get a production-ready Node.js app install
 
 ## To Do
 
-- [ ] Cron job for data requests
-- [ ] Only serve db data to front end
+- [x] Cron job for data requests
+- [x] Only serve db data to front end
 - [ ] Include ads in headline data list
 
 ## Quick Start
